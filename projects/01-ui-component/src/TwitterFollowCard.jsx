@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-function TwitterFollowCard( {children, userName} ) {
-    const [isFollowing, setIsFollowing] = useState(false)
+function TwitterFollowCard( {children, userName, initialIsFollowing} ) {
+    const [isFollowing, setIsFollowing] = useState(initialIsFollowing)
 
     const imgSrc = `https://unavatar.io/github/${userName}?fallback=https://source.boringavatars.com/marble/120/1337_user?colors=264653r,2a9d8f,e9c46a,f4a261,e76f51`
     // const addAt = (userName) => `@${userName}`
@@ -29,7 +29,8 @@ function TwitterFollowCard( {children, userName} ) {
         </header>
         <aside className='tw-followCard-aside'>
             <button className={buttonClassName} onClick={handleClick}>
-                {text} 
+                <span className='tw-followCard-text'>{text}</span> 
+                <span className='tw-followCard-stopFollow'>Dejar de seguir</span>
             </button>
         </aside>
     </article>
