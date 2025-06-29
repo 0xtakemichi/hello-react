@@ -1,13 +1,29 @@
+/* Button.css */
 .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.3rem 1rem;
-    font-size: 1rem;
-    border-radius: 1rem;
-    border: none;
-    background-color: #fca5a5;
-    margin: 1rem;
-    cursor: pointer;
-  }
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #fca5a5;
+  color: #1f2937;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin: 0.5rem;
+}
+
+.button:hover {
+  background-color: #f87171;
+}
+
+.button:focus {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.button__icon {
+  width: 1em;
+  height: 1em;
+}

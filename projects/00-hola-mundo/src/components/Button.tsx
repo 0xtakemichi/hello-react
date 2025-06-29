@@ -1,10 +1,17 @@
+// Button.tsx
 import './Button.css'
 
-function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement> & { icon?: string }) {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    icon?: string
+}
+
+function Button({ children, className, icon, ...props }: ButtonProps) {
   return (
-    <button {...props} className="button">
-      {props.icon && <img src={props.icon} alt="" />}
-      {props.children}
+    <button 
+    {...props}
+    className={`button ${className}`.trim()}>
+      {icon && <img src={icon} alt="" className="button__icon" />}
+      {children}
     </button>
   )
 }
