@@ -15,7 +15,13 @@ class App2 extends Component {
     nombre: '',
     apellido: '',
   }
-  updateValues = (prop, value) => {
+  updateNombre = (value) => {
+    this.updateValues('nombre', value.target.value)
+  }
+  updateApellido(value) {
+    this.updateValues('apellido', value.target.value)
+  }
+  updateValues(prop, value) {
     this.setState({ [prop]: value })
   }
   render() {
@@ -25,11 +31,11 @@ class App2 extends Component {
             <p>Nombre completo: {`${this.state.nombre} ${this.state.apellido}`}
             <Input 
               value={this.state.nombre}
-              onChange={e => this.updateValues('nombre', e.target.value)}
+              onChange={this.updateNombre}
             />
             <Input 
               value={this.state.apellido}
-              onChange={e => this.updateValues('apellido', e.target.value)}
+              onChange={(arg) => this.updateApellido(arg)}
             />
             </p>
         </div>
