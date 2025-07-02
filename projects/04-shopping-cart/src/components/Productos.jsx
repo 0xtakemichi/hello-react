@@ -1,23 +1,24 @@
+import Producto from "./Producto"
+
 function Productos() {
     const productos = [
-        { id: 1, name: 'Cama para perro', price: 10000, img: '' },
-        { id: 2, name: 'Collar para perro', price: 2000, img: '' },
-        { id: 3, name: 'Caña de pescar para gato', price: 4500, img: '' },
+        { id: 1, name: 'Cama para perro', price: 10000, img: '', description: 'Cama cómoda para tu mascota' },
+        { id: 2, name: 'Collar para perro', price: 2000, img: '', description: 'Collar ajustable y cómodo' },
+        { id: 3, name: 'Caña de pescar para gato', price: 4500, img: '', description: 'Caña de pescar para horas de diversión' },
     ]
   return (
     <div>
-        <h2 className="text-2xl font-bold">Productos</h2>
-        <p className="font-bold">Aquí puedes encontrar nuestros productos</p>
-        <section>
+        <h2 className="mt-20 text-4xl font-bold">Productos</h2>
+        <p className="font-bold mb-8">Aquí puedes encontrar nuestros productos</p>
+
+        <div className="flex gap-6 justify-center">
             {productos.map((producto) => (
-                <article key={producto.id}>
-                    <img src={producto.img} alt={producto.name} />
-                    <h3 className="text-lg font-bold">{producto.name}</h3>
-                    <p className="font-bold">{producto.price}</p>
-                    <button className="bg-blue-500 text-white p-2">Agregar al carrito</button>
-                </article>
+                <Producto
+                    key={producto.id}
+                    producto={producto}
+                />
             ))}
-        </section>
+        </div>
     </div>
   )
 }
