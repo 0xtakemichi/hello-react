@@ -1,3 +1,5 @@
+import Productos from './components/Productos'
+
 function App() {
   return (
     <>
@@ -6,8 +8,7 @@ function App() {
         <p>Bienvenido a nuestra tienda de productos para mascotas</p>
       </div>
       <div>
-        <h2>Productos</h2>
-        <p>Aquí puedes encontrar nuestros productos</p>
+        <Productos />
       </div>
     </>
   )
