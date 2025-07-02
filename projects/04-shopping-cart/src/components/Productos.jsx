@@ -6,15 +6,15 @@ function Productos() {
     ]
   return (
     <div>
-        <h2>Productos</h2>
-        <p>Aquí puedes encontrar nuestros productos</p>
+        <h2 className="text-2xl font-bold">Productos</h2>
+        <p className="font-bold">Aquí puedes encontrar nuestros productos</p>
         <section>
             {productos.map((producto) => (
                 <article key={producto.id}>
                     <img src={producto.img} alt={producto.name} />
-                    <h3>{producto.name}</h3>
-                    <p>{producto.price}</p>
-                    <button>Agregar al carrito</button>
+                    <h3 className="text-lg font-bold">{producto.name}</h3>
+                    <p className="font-bold">{producto.price}</p>
+                    <button className="bg-blue-500 text-white p-2">Agregar al carrito</button>
                 </article>
             ))}
         </section>
