@@ -1,12 +1,17 @@
-import React from 'react'
+import BubbleAlert from "./BubbleAlert"
 
 function Carro() {
   return (
-    <button 
-        className="bg-blue-500 text-white p-2 mt-2 rounded-lg cursor-pointer hover:bg-blue-600"
-    >
-        Carro
-    </button>
+    <div>
+        <span className="relative">
+            <BubbleAlert />
+        </span>
+        <button 
+            className="bg-blue-500 text-white p-2 mt-2 rounded-lg cursor-pointer hover:bg-blue-600"
+        >
+            Carro
+        </button>
+    </div>
   )
 }
 
