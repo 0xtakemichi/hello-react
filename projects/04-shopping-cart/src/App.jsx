@@ -1,6 +1,7 @@
 import Productos from './components/Productos'
 import Layout from './components/Layout'
 import Title from './components/Title'
+import Navbar from './components/Navbar'
 
 function App() {
   const productos = [
@@ -28,15 +29,16 @@ function App() {
   ];
 
   return (
-    <>
-      <Title/>
+    <div>
+      <Navbar/>
       <Layout>
+        <Title/>
         <Productos 
           productos={productos}
           agregarAlCarrito={() => console.log('Se deberia agregar el producto;)')}
         />
       </Layout>
-    </>
+    </div>
   )
 }
 
