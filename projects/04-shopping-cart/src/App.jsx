@@ -1,5 +1,6 @@
 import Productos from './components/Productos'
 import Layout from './components/Layout'
+import Title from './components/Title'
 
 function App() {
   const productos = [
@@ -28,10 +29,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <h1 className="text-5xl font-bold">Tienda de productos para mascotas</h1>
-        <p>Bienvenido a nuestra tienda de productos para mascotas</p>
-      </div>
+      <Title/>
       <Layout>
         <Productos 
           productos={productos}
