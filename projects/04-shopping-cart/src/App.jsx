@@ -2,8 +2,19 @@ import Productos from "./components/Productos";
 import Layout from "./components/Layout";
 import Title from "./components/Title";
 import Navbar from "./components/Navbar";
+import { useState } from "react";
 
 function App() {
+  const [carro, setCarro] = useState([
+    {
+      id: 1,
+      name: "Cama para perro",
+      price: 10000,
+      img: "/",
+      description: "Cama cómoda para tu mascota",
+      cantidad: 1,
+    },
+  ]);
   const productos = [
     {
       id: 1,
@@ -27,11 +38,20 @@ function App() {
       description: "Caña de pescar para horas de diversión",
     },
   ];
-  const carro = [{id: 1, name: "Cama para perro", price: 10000, img: "/", description: "Cama cómoda para tu mascota", cantidad: 1}];
   const agregarAlcarro = (producto) => {
-    carro.push({ ...producto, cantidad: 1 })
-  }
-
+    console.log(carro);
+    const existe = carro.find((item) => item.id === producto.id);
+    if (existe) {
+      const nuevoCarro = carro.map((item) =>
+        item.id === producto.id
+          ? { ...item, cantidad: item.cantidad + 1 }
+          : item
+      );
+      return setCarro(nuevoCarro);
+    } else {
+      return setCarro([...carro, { ...producto, cantidad: 1 }]);
+    }
+  };
   return (
     <div>
       <Navbar />
