@@ -1,7 +1,7 @@
-import Productos from './components/Productos'
-import Layout from './components/Layout'
-import Title from './components/Title'
-import Navbar from './components/Navbar'
+import Productos from "./components/Productos";
+import Layout from "./components/Layout";
+import Title from "./components/Title";
+import Navbar from "./components/Navbar";
 
 function App() {
   const productos = [
@@ -27,19 +27,20 @@ function App() {
       description: "Caña de pescar para horas de diversión",
     },
   ];
+  const carro = [{id: 1, name: "Cama para perro", price: 10000, img: "/", description: "Cama cómoda para tu mascota", cantidad: 1}];
+  const agregarAlcarro = (producto) => {
+    carro.push({ ...producto, cantidad: 1 })
+  }
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Layout>
-        <Title/>
-        <Productos 
-          productos={productos}
-          agregarAlCarrito={() => console.log('Se deberia agregar el producto;)')}
-        />
+        <Title />
+        <Productos productos={productos} agregarAlCarrito={agregarAlcarro} />
       </Layout>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
