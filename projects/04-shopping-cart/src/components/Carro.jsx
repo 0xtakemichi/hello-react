@@ -1,4 +1,5 @@
 import BubbleAlert from "./BubbleAlert"
+import DetalleCarro from "./DetalleCarro"
 
 function Carro({carro}) {
   const cantidad = carro.reduce((acc, el) => acc + el.cantidad, 0)
@@ -16,6 +17,7 @@ function Carro({carro}) {
         >
             Carro
         </button>
+        <DetalleCarro carro={carro}/>
     </div>
   )
 }
