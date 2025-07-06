@@ -5,16 +5,7 @@ import Navbar from "./components/Navbar";
 import { useState } from "react";
 
 function App() {
-  const [carro, setCarro] = useState([
-    {
-      id: 1,
-      name: "Cama para perro",
-      price: 10000,
-      img: "/",
-      description: "Cama cómoda para tu mascota",
-      cantidad: 1,
-    },
-  ]);
+  const [carro, setCarro] = useState([]);
   const productos = [
     {
       id: 1,
@@ -39,7 +30,6 @@ function App() {
     },
   ];
   const agregarAlcarro = (producto) => {
-    console.log(carro);
     const existe = carro.find((item) => item.id === producto.id);
     if (existe) {
       const nuevoCarro = carro.map((item) =>
@@ -54,7 +44,7 @@ function App() {
   };
   return (
     <div>
-      <Navbar />
+      <Navbar carro={carro}/>
       <Layout>
         <Title />
         <Productos productos={productos} agregarAlCarrito={agregarAlcarro} />
