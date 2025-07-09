@@ -73,6 +73,11 @@ function App() {
     return null
   }
 
+  const resetGame = () => {
+    setBoard(Array(9).fill(null))
+    setTurn(TURNS.X)
+    setWinner(null)
+  }
     // Maneja el clic en una casilla. Actualiza el tablero, cambia turno y comprueba ganador.
   const updateBoard = (index) => {
     if (board[index] || winner) return
@@ -116,17 +121,28 @@ function App() {
         </Square> 
       </section>
       {
-        winner && (
+        winner !== null && (
           <section className='winner'>
             <div className='text'>
-              <div className='win'>
-                {winner} wins!
-              </div>
-              <button onClick={() => setBoard(Array(9).fill(null))}>Play again</button>
+              <h2>
+                {
+                  winner === false
+                  ? 'Empate'
+                  : 'Ganador'
+                }
+              </h2>
+              <header className='win'>
+                {winner && <Square> {winner} </Square>}
+              </header>
+
+              <footer>
+                <button onClick={resetGame}>Reiniciar</button>
+              </footer>
             </div>
           </section>
         )
       }
+      <button onClick={resetGame}>Reiniciar</button>
     </main>
   )
 }
