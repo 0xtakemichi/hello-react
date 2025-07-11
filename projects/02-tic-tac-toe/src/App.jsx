@@ -80,18 +80,28 @@ function App() {
   }
     // Maneja el clic en una casilla. Actualiza el tablero, cambia turno y comprueba ganador.
   const updateBoard = (index) => {
+    // Si la casilla ya está ocupada o hay un ganador, no hace nada
     if (board[index] || winner) return
+    // Actualiza el tablero con el turno actual
+    // Crea una copia del tablero actual y actualiza la casilla seleccionada
     const newBoard = [...board]
     newBoard[index] = turn
     setBoard(newBoard)
-
+    // Cambia el turno al siguiente jugador
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
-
+    // Comprueba si hay un ganador después de actualizar el tablero
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
       setWinner(newWinner)
+    } else if (checkEndGame(newBoard)) {
+      setWinner(false) // Si no hay ganador y el tablero está lleno, es un empate
     }
+  }
+
+  const checkEndGame = (newBoard) => {
+    // Comprueba si no hay más casillas vacías
+    return newBoard.every(square => square !== null)
   }
 
   return (
@@ -99,14 +109,14 @@ function App() {
       <h1>Tic Tac Toe</h1>
       <section className="game">
         {
-          board.map((_, index) => {
+          board.map((square, index) => {
             return (
               <Square
                 key={index}
                 index={index}
                 updateBoard={updateBoard}
               >
-                {board[index]}
+                {square}
               </Square>
             )
           })
