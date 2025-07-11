@@ -7,47 +7,11 @@
 // 3. Renderizado condicional y mapeo de arrays.
 // El código está comentado paso a paso para facilitar su lectura.
 // ============================
-import React from 'react'
+import confetti from 'canvas-confetti'
 import { useState } from 'react'
-
-// Constante que define los iconos a utilizar para cada turno
-const TURNS = {
-    X: '❌',
-    O: '⭕'
-}
-
-// Combinaciones de índices del tablero que representan una línea ganadora
-const WINNERS_COMBINATIONS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-]
-
-// Componente funcional que representa una casilla individual del tablero.
-// Recibe:
-// - children: lo que se renderiza dentro de la casilla (❌, ⭘ o vacío)
-// - isSelected: booleano para resaltar el turno actual.
-// - updateBoard: función para actualizar el tablero cuando se hace clic.
-// - index: posición de la casilla en el tablero.
-const Square = ({ children, isSelected, updateBoard, index }) => {
-
-  const className = `square ${isSelected ? 'is-selected' : ''}`
-
-  const handleClick = () => {
-    updateBoard(index)
-  }
-
-  return (
-    <div onClick={handleClick} className={className}>
-      {children}
-    </div>
-  )
-}
+import { Square } from './components/Square.jsx'
+import { TURNS } from './constants.js'
+import { checkWinnerFrom } from './logic/board.js'
 
 // Componente raíz de la aplicación. Aquí se mantiene el estado global del juego.
 function App() {
@@ -57,21 +21,6 @@ function App() {
   const [turn, setTurn] = useState(TURNS.X)
     // Estado que guarda el ganador (❌ u ⭕) o 'null' si aún no hay.
   const [winner, setWinner] = useState(null)
-
-    // Función que comprueba si existe un ganador dadas las casillas actuales.
-  const checkWinner = (boardToCheck) => {
-    for (const combo of WINNERS_COMBINATIONS) {
-      const [a, b, c] = combo
-      if (
-        boardToCheck[a] &&
-        boardToCheck[a] === boardToCheck[b] &&
-        boardToCheck[a] === boardToCheck[c]
-      ) {
-        return boardToCheck[a]
-      }
-    }
-    return null
-  }
 
   const resetGame = () => {
     setBoard(Array(9).fill(null))
@@ -91,8 +40,9 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
     // Comprueba si hay un ganador después de actualizar el tablero
-    const newWinner = checkWinner(newBoard)
+    const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
+      confetti()
       setWinner(newWinner)
     } else if (checkEndGame(newBoard)) {
       setWinner(false) // Si no hay ganador y el tablero está lleno, es un empate
