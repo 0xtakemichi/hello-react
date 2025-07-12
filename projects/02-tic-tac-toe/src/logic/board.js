@@ -14,3 +14,8 @@ export const checkWinnerFrom = (boardToCheck) => {
     }
     return null
 }
+
+const checkEndGame = (newBoard) => {
+    // Comprueba si no hay más casillas vacías
+    return newBoard.every(square => square !== null)
+}

@@ -11,7 +11,8 @@ import confetti from 'canvas-confetti'
 import { useState } from 'react'
 import { Square } from './components/Square.jsx'
 import { TURNS } from './constants.js'
-import { checkWinnerFrom } from './logic/board.js'
+import { checkWinnerFrom, checkEndGame } from './logic/board.js'
+import { WinnerModal } from './components/WinnerModal.jsx'
 
 // Componente raíz de la aplicación. Aquí se mantiene el estado global del juego.
 function App() {
@@ -49,11 +50,6 @@ function App() {
     }
   }
 
-  const checkEndGame = (newBoard) => {
-    // Comprueba si no hay más casillas vacías
-    return newBoard.every(square => square !== null)
-  }
-
   return (
     <main className='board'>
       <h1>Tic Tac Toe</h1>
@@ -80,28 +76,9 @@ function App() {
           {TURNS.O}
         </Square> 
       </section>
-      {
-        winner !== null && (
-          <section className='winner'>
-            <div className='text'>
-              <h2>
-                {
-                  winner === false
-                  ? 'Empate'
-                  : 'Ganador'
-                }
-              </h2>
-              <header className='win'>
-                {winner && <Square> {winner} </Square>}
-              </header>
 
-              <footer>
-                <button onClick={resetGame}>Reiniciar</button>
-              </footer>
-            </div>
-          </section>
-        )
-      }
+      <WinnerModal winner={winner} resetGame={resetGame} />
+
       <button onClick={resetGame}>Reiniciar</button>
     </main>
   )
