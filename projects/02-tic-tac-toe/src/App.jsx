@@ -40,6 +40,9 @@ function App() {
     // Cambia el turno al siguiente jugador
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
+    // Guardar la partida
+    window.localStorage.setItem('board', JSON.stringify(newBoard))
+    window.localStorage.setItem('turn', turn)
     // Comprueba si hay un ganador después de actualizar el tablero
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
