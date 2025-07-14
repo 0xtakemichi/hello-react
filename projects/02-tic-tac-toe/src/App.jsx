@@ -13,6 +13,7 @@ import { Square } from './components/Square.jsx'
 import { TURNS } from './constants.js'
 import { checkWinnerFrom, checkEndGame } from './logic/board.js'
 import { WinnerModal } from './components/WinnerModal.jsx'
+import { saveGameToStorage, resetGameInStorage } from './logic/storage/index.js'
 
 // Componente raíz de la aplicación. Aquí se mantiene el estado global del juego.
 function App() {
@@ -39,8 +40,7 @@ function App() {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
-    window.localStorage.removeItem('board')
-    window.localStorage.removeItem('turn')
+    resetGameInStorage()
   }
     // Maneja el clic en una casilla. Actualiza el tablero, cambia turno y comprueba ganador.
   const updateBoard = (index) => {
@@ -54,9 +54,11 @@ function App() {
     // Cambia el turno al siguiente jugador
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
-    // Guardar la partida
-    window.localStorage.setItem('board', JSON.stringify(newBoard))
-    window.localStorage.setItem('turn', newTurn)
+    // Guarda el estado del juego en el almacenamiento local
+    saveGameToStorage({
+      board: newBoard,
+      turn: newTurn
+    })
     // Comprueba si hay un ganador después de actualizar el tablero
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
