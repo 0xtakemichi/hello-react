@@ -28,10 +28,7 @@ function App() {
     // Estado que indica de quién es el turno actual.
   const [turn, setTurn] = useState(() => {
     const turnFromStorage = window.localStorage.getItem('turn')
-    if (turnFromStorage) {
-      return turnFromStorage
-    }
-    return TURNS.X
+    return turnFromStorage ?? TURNS.X
   })
     // Estado que guarda el ganador (❌ u ⭕) o 'null' si aún no hay.
   const [winner, setWinner] = useState(null)
@@ -55,10 +52,7 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
     // Guarda el estado del juego en el almacenamiento local
-    saveGameToStorage({
-      board: newBoard,
-      turn: newTurn
-    })
+    saveGameToStorage(newBoard, newTurn)
     // Comprueba si hay un ganador después de actualizar el tablero
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
@@ -93,7 +87,7 @@ function App() {
         </Square>
         <Square isSelected={turn === TURNS.O}>
           {TURNS.O}
-        </Square> 
+        </Square>
       </section>
 
       <WinnerModal winner={winner} resetGame={resetGame} />
