@@ -14,6 +14,10 @@ function App() {
     if (enabled) {
       window.addEventListener('pointermove', handleMouseMove)
     }
+    return () => {
+      window.removeEventListener('pointermove', handleMouseMove)
+      setPosition({ x: 0, y: 0 })
+    }
   }, [enabled])
 
   return (
