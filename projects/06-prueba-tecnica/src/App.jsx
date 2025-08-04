@@ -8,14 +8,18 @@ function App() {
   const [fact, setFact] = useState()
   const [imageUrl, setImageUrl] = useState()
 
-  // para recuperar la cita al cargar la aplicación
-  useEffect(() => {
+  const getRandomFact = () => {
     fetch(CAT_ENDPOINT_RANDOM_FACT)
       .then(res => res.json())
       .then(data => {
         const { fact } = data
         setFact(fact)
       })
+  }
+
+  // para recuperar la cita al cargar la aplicación
+  useEffect(() => {
+    getRandomFact()
   }, [])
 
   // para recuperar la imagen cada vez que tenemos una cita nueva
@@ -30,9 +34,14 @@ function App() {
       })
   }, [fact])
 
+  const handleClick = () => {
+    getRandomFact()
+  }
+
   return (
     <main>
       <h1>App de gatitos</h1>
+      <button onClick={handleClick}>Get new fact</button>
       <section>
         {fact && <p>{fact}</p>}
         {imageUrl && <img src={imageUrl} alt="Image extracted using the first three words of the fact" />}
