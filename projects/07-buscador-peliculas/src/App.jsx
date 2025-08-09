@@ -3,35 +3,40 @@ import { useMovies } from './hooks/useMovies'
 import { Movies } from './components/Movies'
 import { useState, useEffect } from 'react'
 
-function App() {
-  const { movies } = useMovies()
-  const [query, setQuery] = useState('')
+function useSearch() {
+  const [search, updateSearch] = useState('')
   const [error, setError] = useState(null)
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log({ query })
-  }
-
-  const handleChange = (event) => {
-    setQuery(event.target.value)
-  }
-
   useEffect(() => {
-    if (query === '') {
+    if (search === '') {
       setError('Search query cannot be empty.')
       return
     }
-    if (query.length < 3) {
+    if (search.length < 3) {
       setError('Search query must be at least 3 characters long.')
       return
     }
-    if (!/^[a-zA-Z0-9 ]*$/.test(query)) {
+    if (!/^[a-zA-Z0-9 ]*$/.test(search)) {
       setError('Search query must not contain special characters.')
       return
     }
     setError(null)
-  }, [query])
+  }, [search])
+  return { search, updateSearch, error }
+}
+
+function App() {
+  const { movies } = useMovies()
+  const { search, updateSearch, error } = useSearch()
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log({ search })
+  }
+
+  const handleChange = (event) => {
+    updateSearch(event.target.value)
+  }
 
   return (
     <>
@@ -41,7 +46,7 @@ function App() {
           <form className="form" onSubmit={handleSubmit}>
             <input
               style={{ border: '1px solid transparent', borderColor: error ? 'red' : 'transparent' }}
-              value={query}
+              value={search}
               onChange={handleChange}
               name='query'
               placeholder="Search for a movie..."
