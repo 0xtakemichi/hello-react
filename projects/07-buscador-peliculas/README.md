@@ -11,7 +11,7 @@ Consigue la API Key en la propia página web registrando tu email.
 
 [x] Lista las películas y muestra el título, año y poster.
 
-[] Que el formulario funcione
+[x] Que el formulario funcione
 
 [] Haz que las películas se muestren en un grid responsive.
 
