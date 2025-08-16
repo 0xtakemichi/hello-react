@@ -1,28 +1,12 @@
-import withResults from '../mocks/with-results.json'
-import withoutResults from '../mocks/without-results.json'
 import { useState } from 'react'
+import { searchMovies } from '../services/movies'
 
 export function useMovies({ search }) {
-    const [resposeMovies, setResponseMovies] = useState([])
-    const movies = resposeMovies.Search
+    const [movies, setMovies] = useState([])
 
-    const mappedMovies = movies?.map(movie => ({
-        id: movie.imdbID,
-        title: movie.Title,
-        year: movie.Year,
-        poster: movie.Poster
-    }))
-    const getMovies = () =>{
-        if (search){
-            // setResponseMovies(withResults)
-            fetch(`https://www.omdbapi.com/?apikey=${import.meta.env.VITE_OMDB_API_KEY}&s=${search}`)
-                .then(res => res.json())
-                .then(json => {
-                    setResponseMovies(json)
-                })
-        } else {
-            setResponseMovies(withoutResults)
-        }
+    const getMovies = async () => {
+        const newMovies = await searchMovies({ search })
+        setMovies(newMovies)
     }
-    return { movies: mappedMovies, getMovies }
+    return { movies, getMovies }
 }
