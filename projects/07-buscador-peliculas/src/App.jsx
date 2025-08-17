@@ -1,7 +1,7 @@
 import './App.css'
 import { useMovies } from './hooks/useMovies'
 import { Movies } from './components/Movies'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, use } from 'react'
 
 function useSearch() {
   const [search, updateSearch] = useState('')
@@ -31,12 +31,19 @@ function useSearch() {
 }
 
 function App() {
+  const [sort, setSort] = useState(false)
+
   const { search, updateSearch, error } = useSearch()
-  const { movies, getMovies, loading } = useMovies({ search })
+  const { movies, getMovies, loading } = useMovies({ search, sort })
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
     getMovies()
+  }
+
+  const handleSort = () => {
+    setSort(!sort)
   }
 
   const handleChange = (event) => {
@@ -59,6 +66,7 @@ function App() {
             <button type="submit">Search</button>
           </form>
           {error && <p style={{ color: 'red' }}>{error}</p>}
+          <input type="checkbox" onChange={handleSort} checked={sort} />
         </header>
 
         <main>
