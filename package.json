@@ -1,5 +1,5 @@
 {
-  "name": "demo-react",
+  "name": "hello-react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,5 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.11.0"
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "standard": "^17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  }
 }
