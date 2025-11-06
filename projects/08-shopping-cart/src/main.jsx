@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { FiltersProvider } from './context/filters.js'
+import { FiltersProvider } from './context/filters'
 import './index.css'
 import App from './App.jsx'
 
