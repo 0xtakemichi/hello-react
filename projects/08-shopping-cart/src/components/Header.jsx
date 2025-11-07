@@ -1,10 +1,10 @@
 import Filters from './Filters'
 
-function Header({ changeFilters }) {
+function Header() {
         return (
             <>
                 <h1>Shopping Cart</h1>
-                <Filters onChange={changeFilters}/>
+                <Filters />
             </>
         )
     }
