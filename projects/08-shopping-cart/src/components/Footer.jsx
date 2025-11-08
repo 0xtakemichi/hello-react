@@ -1,6 +1,10 @@
+import { useFilters } from '../hooks/useFilters'
 import './Footer.css'
 
-function Footer ({ filters }) {
+function Footer () {
+
+    const { filters } = useFilters
+
     return (
         <footer className='footer'>
             {
