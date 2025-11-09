@@ -20,7 +20,7 @@ export function CartProvider({ children }) {
     }
 
     // Product does not exist in cart
-    setCart((prevState) => [...prevState, { product, quantity: 1 }]);
+    setCart((prevState) => [...prevState, { ...product, quantity: 1 }]);
   };
   const clearCart = () => {
     setCart([]);
