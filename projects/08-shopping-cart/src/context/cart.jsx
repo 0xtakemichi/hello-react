@@ -22,12 +22,19 @@ export function CartProvider({ children }) {
     // Product does not exist in cart
     setCart((prevState) => [...prevState, { ...product, quantity: 1 }]);
   };
+
+  const removeFromCart = (product) => {
+    setCart((prevState) => prevState.filter((item) => item.id !== product.id));
+  };
+
   const clearCart = () => {
     setCart([]);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, clearCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );
