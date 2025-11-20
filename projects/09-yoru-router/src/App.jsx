@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function HomePage() {
   return (
     <>
@@ -22,10 +24,12 @@ function AboutPage() {
 }
 
 function App() {
+  const [currentPage, setCurrentPage] = useState(window.location.pathname);
+
   return (
     <main>
-      <HomePage />
-      <AboutPage />
+      {currentPage == "/" && <HomePage />}
+      {currentPage == "/about" && <AboutPage />}
     </main>
   );
 }
