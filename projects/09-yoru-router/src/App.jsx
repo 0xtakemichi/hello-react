@@ -1,34 +1,7 @@
 import { useEffect, useState } from "react";
 import { EVENTS } from "./const";
-
-function navigate(href) {
-  window.history.pushState({}, "", href);
-  const navigationEvent = new Event(EVENTS.PUSHSTATE);
-  window.dispatchEvent(navigationEvent);
-}
-
-function HomePage() {
-  return (
-    <>
-      <h1>Inicio</h1>
-      <p>Creamdo React Router desde cero</p>
-      <button onClick={() => navigate("/about")}>Sobre nosotros</button>
-    </>
-  );
-}
-
-function AboutPage() {
-  return (
-    <>
-      <h1>Acerca de</h1>
-      <div>
-        <img src="https://placehold.co/200x200" alt="avatar" />
-      </div>
-      <p>Esta es la página de acerca de</p>
-      <button onClick={() => navigate("/")}>Volver</button>
-    </>
-  );
-}
+import HomePage from "./pages/Home";
+import AboutPage from "./pages/About";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
