@@ -3,12 +3,20 @@ import { EVENTS } from "./const";
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 
-function App() {
-  const [currentPage, setCurrentPage] = useState(window.location.pathname);
+const routes = [
+  { path: "/", Component: HomePage },
+  { path: "/about", Component: AboutPage },
+];
+
+function Router({
+  routes = [],
+  defaultComponent: DefaultComponent = () => <h1>404</h1>,
+}) {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   useEffect(() => {
     const onLocationChange = () => {
-      setCurrentPage(window.location.pathname);
+      setCurrentPath(window.location.pathname);
     };
     window.addEventListener(EVENTS.PUSHSTATE, onLocationChange);
     // Para volver atras con navegacion del navegador
@@ -18,11 +26,14 @@ function App() {
       window.removeEventListener(EVENTS.POPSTATE, onLocationChange);
     };
   }, []);
+  const Page = routes.find(({ path }) => path === currentPath)?.Component;
+  return Page ? <Page /> : <DefaultComponent />;
+}
 
+function App() {
   return (
     <main>
-      {currentPage == "/" && <HomePage />}
-      {currentPage == "/about" && <AboutPage />}
+      <Router routes={routes} />
     </main>
   );
 }
