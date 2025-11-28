@@ -11,6 +11,10 @@ const LazyHomePage = lazy(() => import("./pages/Home.jsx"));
 
 const appRoutes = [
   {
+    path: "/:lang/about",
+    Component: LazyAboutPage,
+  },
+  {
     path: "/search/:query",
     Component: SearchPage,
   },
